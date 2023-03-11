@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<link rel="shortcut icon" href="../icon_green.ico">
+<link rel="icon" href="../icon_green.jpg">
+<title>About</title>
+<style type="text/css">
+  body {background: url(../background.jpg); background-repeat: no-repeat;}
+</style>
+</head>
+
+<body bgcolor="white" link="blue">
+
+<font style="font-family:arial,helvetica,sans-serif" color="black">
+
+<table width="450" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td>
+
+<img src="../banner_green.jpg">
+
+</td>
+</tr>
+
+<table width="450" border="0" cellspacing="0" cellpadding="10">
+
+<tr>
+<td>
+
+<p>
+<img src="gss_294_3364_color_trim_sub1_text.jpg" align="center" vspace="10" hspace="0"
+alt=""
+onMouseOver="window.status='Here is a distant galaxy.';return true;"
+onMouseOut="window.status='Here is a distant galaxy.';return true;"
+>
+This is a disk-shaped galaxy much like our own. Interestingly, the light we see left this galaxy about the same time our Earth was forming, around 5 billion years ago. We know this from measuring the shift in wavelength of its spectrum (expressed as the parameter 'z') towards redder colours. This is caused by the light having to travel to us at a constant rate across our expanding universe.
+<a href="about.html#galaxies" 
+onClick='parent.contents.location.href="../contents_about.html"'
+onMouseOver="window.status='Back';return true;" onMouseOut="window.status='';return true;">
+<img src="../back.jpg" alt="Back" vspace="0" hspace="0" border="0"></a>
+</p>
+
+</td>
+</tr>
+
+</table>
+
+</font>
+
+</body>
+
+</html>

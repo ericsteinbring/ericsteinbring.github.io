@@ -1,0 +1,29 @@
+11 May 2020
+
+Reformatted CV, numbering publications suitable to count towards minimum limits in NRC promotional case; and for printing as a PDF.
+
+Note that the plain curriculum_vitae.html file was no longer updated as of 2017, because this was when Shaw pulled availability of web-hosting.  The curriculum_vitae_reformat file has been kept current instead.
+
+Two potential routes to making a CV from the HTML file:
+
+1) Pull up the modified HTML file in a browser. See the "reformat" version to see how to reformat it. Capture this with the browser as a PostScript file. And then convert it:
+
+Pull it up as:
+
+file:///home/steinbringe/Webpages/curriculum_vitae/curriculum_vitae_reformat.html
+
+Note that the width of the columns is important, and can be twiddled to get all to fit nicely.  Retain a width of 900 for the title page, but then just above the "Service" section, reset to anything from 900 to 1000 to get the rest to fit.  Be sure that the browser is set not to "watermark" or stamp with date and time, in the settings.  This varies browser to browser.
+
+To set CV to print out a *numbered* list of each type of publication, edit out the <ul> and </ul> brackets in the HTML code; numbers should be added to each new publication regardless, but won't show unless <ol> and </ol> are active. 
+
+Press "print" and either print it directly, or save by selecting "Print to File" and saving as a PostScript or PDF file.
+
+2) Generate a PDF directly from the HTML file.
+
+Take the curriculum_vitae.html file from the Webpages CV directory, and run
+
+>html2ps curriculum_vitae.html > curriculum_vitae.ps
+
+>ps2pdf curriculum_vitae.ps > curriculum_vitae.pdf
+
+This way doesn't seem to format correctly, so process 1) is better.

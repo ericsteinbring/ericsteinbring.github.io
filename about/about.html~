@@ -1,0 +1,121 @@
+<html>
+
+<head>
+<link rel="shortcut icon" href="../icon_blue.ico">
+<link rel="icon" href="../icon_blue.jpg">
+<title>About</title>
+<style type="text/css">
+  body {background: url(../foreground_blue_clipped.jpg); background-attachment: fixed ; background-position: top left; background-repeat: no-repeat;}
+</style>
+</head>
+
+<body bgcolor="white" link="blue">
+
+<font style="font-family:arial,helvetica,sans-serif" color="black">
+
+<table width="450" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td><img src="../spacer_little.jpg" alt="" vspace="20" hspace="0" align="right"></td>
+</tr>
+
+</table>
+
+<table border="0" cellspacing="0" cellpadding="10">
+<td width="90">
+<i>
+I'm an astronomer with the National Research Council Canada, working in high-resolution imaging.<br>
+</i>
+</td>
+
+</table>
+
+<table width="450" border="0" cellspacing="0" cellpadding="10">
+
+<tr>
+<td bgcolor="white">
+
+<p>
+If only subtly, everything changes with time. Many long-term changes are an intuitive part of day-to-day life. Technology advances. People age. Galaxies are evolving too, although far too slowly to detect in a person's lifetime. But pictures of far away galaxies are snapshots of them from the distant past. Thus, by comparing with those nearby, we can still see the effects of underlying trends - and possibly even fundamental physics - over the roughly 14 billion year history of the universe.
+</p>
+
+<p id="galaxies">
+<img src ="m31_small_text_fix.jpg" width ="430" height ="392" align="center" vspace="0" hspace="0" border="0"
+alt="An image of nearby galaxies." />
+<img src ="gss_294_3364_color_trim_text_small_combined_fix.jpg"
+width ="430" height ="392" align="center" vspace="0" hspace="0" border="0"
+alt="This is an HST+AO picture of distant galaxies."
+onMouseOver="window.status='This is an HST+AO picture of distant galaxies. Click on a galaxy to enlarge.';return true;"
+onMouseOut="window.status='';return true;"
+usemap ="#galaxymap" />
+<map id ="galaxymap"
+name="galaxymap">
+<area shape ="rect" coords ="44,188,220,290"
+  href ="galaxy1.html" target ="main"
+  alt=""
+  onClick='parent.contents.location.href="../contents_galaxy1.html"'
+  onMouseOver="window.status='Click to enlarge.';return true;"
+  onMouseOut="window.status='';return true;"
+  />
+<area shape ="circle" coords ="121,358,27"
+  href ="galaxy2.html" target ="main"
+  alt="" 
+  onClick='parent.contents.location.href="../contents_galaxy2.html"'
+  onMouseOver="window.status='Click to enlarge.';return true;"
+  onMouseOut="window.status='';return true;"
+  />
+</map>
+</p>
+
+<p>
+I study distant galaxies and quasars, which appear very small and faint on the sky. One way to do this is with the <a href="http://www.stsci.edu/" target="_top">Hubble Space Telescope</a> (HST), which takes sharp pictures because it is above the blurring effects of the atmosphere. Another is with large ground-based telescopes employing adaptive optics (AO), using a laser beam or a bright star nearby on the sky to measure and counteract that effect. Above is a comparison I've made with an easily-visible galaxy that's "close to us", after combining HST and AO on one of the twin 10-meter <a href="http://www2.keck.hawaii.edu/" target="_top">Keck Telescopes</a>.
+</p>
+
+<img src="side_by_side.jpg" align="center"
+vspace="0" hspace="0"
+alt="An example of evolution."
+onMouseOver="window.status='An example of evolution.';return true;"
+onMouseOut="window.status='';return true;"
+>
+
+<p>
+The current generation of large telescopes have apertures between 8 and 10 meters in diameter, and are built on remote mountaintops that afford the clearest views. Examples are the twin <a href="http://www.gemini.edu" target="_top">Gemini Telescopes</a> - one of which is located in Hawaii, in the northern hemisphere; the other in Chile, in the southern hemisphere. Together they can access the whole sky, and each is big enough to study galaxies near the edge of our visible universe, seen as they were just a billion or so years after the first galaxies formed. 
+<img src="tmt.jpg" align="right" 
+vspace="5" hspace="10" alt="A comparison of TMT to current telescopes." 
+onMouseOver="window.status='A comparison of TMT to current telescopes';return true;" 
+onMouseOut="window.status='';return true;">
+</p>
+
+<p>
+Utilizing AO on bigger telescopes will be even more challenging, but necessary to observe the first galaxies. This is the scientific rationale behind the <a href="http://www.tmt.org/" target="_top"> Thirty-Meter Telescope</a> (TMT).
+</p>
+
+<p>
+The huge size and infrastructure requirements of the TMT effectively limits it to be on a mountain already developed for astronomy, now selected to be Mauna Kea in Hawaii. Future telescopes, however, may benefit from a truly remote location, such as near one of the poles. So I've also used robotic testing equipment to explore the world's northernmost high mountains. The intensely cold, dry, and calm air make these potentially the best astronomical sites on the planet.
+</p>
+
+<img src="steinbring_weather_station.jpg" align="center" 
+vspace="0" hspace="0" alt="A possible telescope site on Northern Ellesmere Island, Canada." 
+onMouseOver="window.status='A possible telescope site on Northern Ellesmere Island, Canada';return true;"
+onMouseOut="window.status='';return true;">
+
+</td>
+</tr>
+
+</table>
+
+<table width="450" border="0" cellspacing="0" cellpadding="10" bgcolor="white">
+<tr><img src="../line.jpg" alt="" vspace="0" hspace="2"></tr>
+<td width="220"><img src="../copyright.jpg" vspace="0" hspace="0"></td>
+<td width="10"><a href="#top" onMouseOver="window.status='Top of Page';return true;" onMouseOut="window.status='';return true;">
+<img src="../arrow.jpg" alt="Top of Page" vspace="0" hspace="0" border="0" align="center"></a></td>
+<td width="200"><a href="../legal_notices.html" onClick='parent.contents.location.href="../contents_legal_notices.html"' 
+onMouseOver="window.status='Legal Notices';return true;" onMouseOut="window.status='';return true;">
+<img src="../legal_notices.jpg" vspace="0" hspace="0" border="0" align="right"></a></td>
+</table>
+
+</font>
+
+</body>
+
+</html>
