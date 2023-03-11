@@ -1,0 +1,58 @@
+<html>
+
+<head>
+<link rel="shortcut icon" href="icon_blue.ico">
+<link rel="icon" href="icon_blue.jpg">
+<title>Legal Notices</title>
+<style type="text/css">
+  body {background: url(background.jpg); background-repeat: no-repeat;}
+</style>
+</head>
+
+<body bgcolor="white" link="blue">
+
+<font style="font-family:arial,helvetica,sans-serif" color="black">
+
+<table width="450" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td>
+
+<img src="banner_blue.jpg">
+
+</td>
+</tr>
+
+<table width="450" border="0" cellspacing="0" cellpadding="10">
+
+<tr>
+<td>
+
+<b>Disclaimer</b>
+<p>
+The ideas and opinions expressed on this website are my own, and do not necessarily reflect those of my employer.
+</p>
+
+<b>Copyright</b>
+<p>
+Unless otherwise indicated, materials on this website were produced by me. You can request my permission to use them for non-commercial purposes.
+</p>
+
+<b>Photo Credit</b>
+<p>
+The cover image shows a Digital Equipment Corporation VT100 terminal. It was made
+ with
+ Gimp using a photo from the University of Amsterdam Computer Museum online archives.
+</p>
+
+</td>
+</tr>
+
+</table>
+
+
+</font>
+
+</body>
+
+</html>

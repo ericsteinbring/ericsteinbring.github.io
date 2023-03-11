@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<link rel="shortcut icon" href="icon_blue.ico">
+<link rel="icon" href="icon_blue.jpg">
+<title>Main</title>
+</head>
+
+<body bgcolor="white">
+
+<table width="450" border="0" cellspacing="0" cellpadding="0">
+
+<tr>
+<td>
+<img src="foreground_blue_window.jpg">
+<tr>
+<td>
+<img name="pt1" src="cursor_off.jpg" align="right" vspace="0" hspace="0" border="0">
+</td>
+<td>
+<a style="text-decoration: none" href="about/about.html" target="main"
+onClick='parent.contents.location.href="contents_about.html"'
+onMouseOver="on(document.pt1),
+onMouseOver=window.status='About';return true;"
+onMouseOut="off(document.pt1),
+onMouseOut=window.status='';return true;">
+<img src="about.jpg" alt="About" vspace="4" hspace="2" border="0"></a>
+</td>
+</tr>
+
+<tr>
+<td>
+<img name="pt2" src="cursor_off.jpg" align="right" vspace="0" hspace="0" border="0">
+</td>
+<td>
+<a style="text-decoration: none" href="curriculum_vitae/curriculum_vitae.html" target="main"
+onClick='parent.contents.location.href="contents_curriculum_vitae.html"'
+onMouseOver="on(document.pt2),
+onMouseOver=window.status='Curriculum Vitae';return true;"
+onMouseOut="off(document.pt2),
+onMouseOut=window.status='';return true;">
+<img src="curriculum_vitae.jpg" alt="Curriculum Vitae" vspace="4" hspace="2" border="0"></a>
+</td>
+</tr>
+
+<tr>
+<td>
+<img name="pt3" src="cursor_off.jpg" align="right" vspace="0" hspace="0" border=
+"0">
+</td>
+<td>
+<a style="text-decoration: none" href="links/links.html" target="main"
+onClick='parent.contents.location.href="contents_links.html"'
+onMouseOver="on(document.pt3),
+onMouseOver=window.status='Links';return true;"
+onMouseOut="off(document.pt3),
+onMouseOut=window.status='';return true;">
+<img src="links.jpg" alt="Links" vspace="4" hspace="2" border="0"></a>
+</td>
+</tr>
+
+</td>
+</tr>
+
+</table>
+
+</body>
+
+</html>
