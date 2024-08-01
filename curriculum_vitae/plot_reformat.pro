@@ -7,7 +7,7 @@ born = 1971
 thesis = 1995
 dissertation = 2001
 postdoc = 2003
-baseline = 2001
+baseline = 2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995
 continuing = 2013
 covid = 2019 ; 2020
 retirement = 2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65)
@@ -46,11 +46,12 @@ retirement = retirement - first_year
 publications = refereed + conference + other_publications
 outreach = invited + contributed + other_outreach
 output = publications + outreach
+print, 'Year of first publication: ', floor(first_year)
 print, 'Retiring at age: ', retiring
 
 ; calculate output
 print, 'Output'
-print, 'Calculated to the end of ', floor(last_year-1)
+print, 'Current as of ', floor(last_year-1)
 
 ; report
 print, 'Total refereed, conference, publications, invited, contributed, outreach:'
@@ -82,9 +83,9 @@ slope_outreach = outreach(years - 1) - outreach(years - 2)
 slope_output = output(years - 1) - output(years - 2)
 print, 'Rates'
 print, 'Current refereed, conference, publications, invited, contributed, and outreach:'
-print, slope_refereed, slope_conference, slope_publications, slope_invited, slope_contributed, slope_outreach
-print, 'Currrent output per year:'
-print, slope_output
+print, floor(slope_refereed), floor(slope_conference), floor(slope_publications), floor(slope_invited), floor(slope_contributed), floor(slope_outreach)
+;print, 'Currrent output per year:'
+;print, floor(slope_output)
 
 ; and extend this for five years
 refereed_extension = fltarr(6)
@@ -138,7 +139,7 @@ output_extension(4) = output_extension(3) + slope_output
 output_extension(5) = output_extension(4) + slope_output
 
 ; average output
-print, 'Average at the end of ', floor(last_year-1)
+print, 'Five-year average at the end of ', floor(last_year-1)
 
 ; and average, based on a linear fit
 slope_refereed = linfit(year(baseline:*), refereed(baseline:*), yfit=refereed_fit)
@@ -157,8 +158,8 @@ slope_outreach = slope_outreach(1)
 slope_output = slope_output(1)
 print, 'Average refereed, conference, publications, invited, contributed, and outreach:'
 print, slope_refereed, slope_conference, slope_publications, slope_invited, slope_contributed, slope_outreach
-print, 'Average output per year:'
-print, slope_output
+;print, 'Average output per year:'
+;print, slope_output
 
 ; extend this prediction for five years
 refereed_prediction = fltarr(6)
@@ -225,34 +226,39 @@ print, 'Predictions'
 print, 'At the end of ', floor(last_year)
 print, 'Refereed, conference, publications, invited, contributed, and outreach:'
 print, floor(refereed_prediction(1)), floor(conference_prediction(1)), floor(publications_prediction(1)), floor(invited_prediction(1)), floor(contributed_prediction(1)), floor(outreach_prediction(1))
-print, 'Total: ', floor(output_prediction(1))
+;print, 'Total: ', floor(output_prediction(1))
 print, 'At the end of ', floor(last_year+4)
 print, floor(refereed_prediction(4)), floor(conference_prediction(4)), floor(publications_prediction(4)), floor(invited_prediction(4)), floor(contributed_prediction(4)), floor(outreach_prediction(4))
-print, 'Total: ', floor(output_prediction(4))
-print, 'Career at retirement:'
+;print, 'Total: ', floor(output_prediction(4))
+print, 'Career at retirement'
 print, floor(refereed_career), floor(conference_career), floor(publications_career), floor(invited_career), floor(contributed_career), floor(outreach_career)
-print, 'Total: ', floor(output_career)
+;print, 'Total: ', floor(output_career)
 
 ; plot publications
 limit = limit_publications
 future = [year(years-1), year(years-1) + 1, year(years-1) + 2, year(years-1) + 3, year(years-1) + 4, year(years-1) + 5]
 ;plot, year, publications, thick=2, xtitle='Year', ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], charsize=charsize, color=0
-plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], charsize=charsize, charthick=charthick, color=0
+plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1,1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
  oplot, [year(covid), year(covid)]+0.5+i, [0., limit], thick=25, color=200
 endfor
+;; and a quadratic fit to all
+;;quadratic_publications = poly_fit(year(*), publications(*), 2, yfit=quadratic_publications_fit)
+;;oplot, year, quadratic_publications_fit, thick=3, color=150
+;quadratic_publications = poly_fit(year(baseline:*), publications(baseline:*), 2, yfit=quadratic_publications_fit)
+;oplot, year(baseline:*), quadratic_publications_fit, thick=3, color=150
 loadct, 39, /silent ; back to colour
 ; limits
-oplot, [year(baseline), year(baseline)], [0., limit], linestyle=3, color=0
+oplot, [year(baseline), year(baseline)], [0., limit], linestyle=1, color=0
 oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
 oplot, [year(covid), year(covid)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
-oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
+;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
 oplot, year, publications, thick=2, color=0
 oplot, year, refereed+conference, thick=2, color=color_conference
@@ -266,9 +272,6 @@ oplot, year(baseline:*), refereed_fit+conference_fit, color=color_conference
 oplot, future, publications_prediction, linestyle=3, color=0
 oplot, future, refereed_prediction, linestyle=3, color=color_refereed
 oplot, future, refereed_prediction+conference_prediction, linestyle=3, color=color_conference
-; and a quadratic fit to all
-quadratic_publications = poly_fit(year(*), publications(*), 2, yfit=quadratic_publications_fit)
-;oplot, year, quadratic_publications_fit, thick=2, linestyle=1, color=0
 ; labels
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
@@ -279,7 +282,9 @@ xyouts, covid+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 15, 'Conf., etc.', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 15, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 25, 'conf., and', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 35, 'newsletters', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -291,21 +296,27 @@ axis, yaxis=1, color=0, ystyle=1, yrange=[0., limit], ytickformat='(A1)'
 
 ; plot outreach
 limit = limit_outreach
-plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at end of each calendar year)', ytitle='Talks and other outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], charsize=charsize, charthick=charthick, color=0
+plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Talks and other outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[4, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
  oplot, [year(covid), year(covid)]+0.5+i, [0., limit], thick=25, color=200
 endfor
+;; and a quadratic fit to all
+;;quadratic_outreach = poly_fit(year(*), outreach(*), 2, yfit=quadratic_outreach_fit)
+;;oplot, year, quadratic_outreach_fit, thick=3, color=150
+;quadratic_outreach = poly_fit(year(baseline:*), outreach(baseline:*), 2, yfit=quadratic_outreach_fit)
+;oplot, year(baseline:*), quadratic_outreach_fit, thick=3, color=150
 loadct, 39, /silent ; back to colour
 ; limits
-oplot, [year(baseline), year(baseline)], [0., limit], linestyle=3, color=0
+oplot, [year(baseline), year(baseline)], [0., limit], linestyle=1, color=0
 oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
 oplot, [year(covid), year(covid)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
+;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
 oplot, year, outreach, thick=2, color=0
 oplot, year, invited+contributed, thick=2, color=color_contributed
@@ -319,9 +330,6 @@ oplot, year(baseline:*), invited_fit+contributed_fit, color=color_contributed
 oplot, future, outreach_prediction, linestyle=3, color=0
 oplot, future, invited_prediction, linestyle=3, color=color_invited
 oplot, future, invited_prediction+contributed_prediction, linestyle=3, color=color_contributed
-; and a quadratic fit to all
-quadratic_outreach = poly_fit(year(*), outreach(*), 2, yfit=quadratic_outreach_fit)
-;oplot, year, quadratic_outreach_fit, thick=2, linestyle=1, color=0
 ; labels
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
@@ -331,7 +339,8 @@ xyouts, continuing+first_year + 1., limit - 5, 'Continuing, Staff', alignment=1.
 xyouts, covid+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year) - 10, 'Invited', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 10, 'Contributed', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 10, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 15, 'contributed', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 15, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 20, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 25, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
