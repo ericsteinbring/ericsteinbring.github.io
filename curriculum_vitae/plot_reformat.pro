@@ -238,7 +238,7 @@ print, floor(refereed_career), floor(conference_career), floor(publications_care
 limit = limit_publications
 future = [year(years-1), year(years-1) + 1, year(years-1) + 2, year(years-1) + 3, year(years-1) + 4, year(years-1) + 5]
 ;plot, year, publications, thick=2, xtitle='Year', ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], charsize=charsize, color=0
-plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1,1], charsize=charsize, charthick=charthick, color=0
+plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1.5,1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
@@ -296,7 +296,7 @@ axis, yaxis=1, color=0, ystyle=1, yrange=[0., limit], ytickformat='(A1)'
 
 ; plot outreach
 limit = limit_outreach
-plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Talks and other outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[4, 1], charsize=charsize, charthick=charthick, color=0
+plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Talks and other outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
