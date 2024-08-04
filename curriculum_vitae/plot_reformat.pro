@@ -288,6 +288,8 @@ xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-fi
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
 axis, xaxis=0, color=0, xstyle=1, xrange=[first_year-1,last_year+5], charsize=charsize
 axis, xaxis=1, color=0, xstyle=1, xrange=[first_year-1,last_year+5], xtickformat='(A1)'
@@ -296,7 +298,7 @@ axis, yaxis=1, color=0, ystyle=1, yrange=[0., limit], ytickformat='(A1)'
 
 ; plot outreach
 limit = limit_outreach
-plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Talks and other outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
+plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Talks and other public outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
@@ -344,6 +346,8 @@ xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-fi
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 15, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 20, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 25, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 10, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 15, strmid(strtrim(string(slope_outreach), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
 axis, xaxis=0, color=0, xstyle=1, xrange=[first_year-1,last_year+5], charsize=charsize
 axis, xaxis=1, color=0, xstyle=1, xrange=[first_year-1,last_year+5], xtickformat='(A1)'
