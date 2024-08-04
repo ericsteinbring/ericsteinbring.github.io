@@ -13,7 +13,7 @@ covid = 2019 ; 2020
 retirement = 2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65)
 
 ; setup
-window, 1, xsize = 900, ysize = 1100, title='Cumulative publications and outreach for Eric Steinbring'
+window, 1, xsize = 850, ysize = 1100, title='Cumulative publications and outreach for Eric Steinbring'
 wshow, 1
 !p.multi = [0, 1, 2]
 charsize = 2. ; 3. ; 2.5 ; 2.25
