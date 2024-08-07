@@ -9,7 +9,7 @@ dissertation = 2001
 postdoc = 2003
 baseline = 2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995
 continuing = 2013
-covid = 2019 ; 2020
+pandemic = 2019 ; 2020
 retirement = 2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65)
 
 ; setup
@@ -28,9 +28,10 @@ charsize_text = charsize-0.25 ; charsize-0.5 ; charsize-1.
 
 ; read in data
 rdfloat, 'plot_reformat_2024.txt', year, refereed, conference, other_publications, invited, contributed, other_outreach, /silent
-year = year + 1 ; shift the year that is read in by one, that is, report all publications to end of calendar year
+;year = year - 1 ; shift backward the year that is read in by one, that is, report all publications to end of previous calendar year
+year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year
 years = n_elements(year)
-first_year = year(0)
+first_year = year(0) ; floor(min(year(where((refereed gt 0) or (conference gt 0) or (other_publications gt 0))))) ; year(0)
 last_year = year(years - 1)
 
 ; calculations
@@ -41,7 +42,7 @@ dissertation = dissertation - first_year
 postdoc = postdoc - first_year
 baseline = baseline - first_year
 continuing = continuing - first_year
-covid = covid - first_year
+pandemic = pandemic - first_year
 retirement = retirement - first_year
 publications = refereed + conference + other_publications
 outreach = invited + contributed + other_outreach
@@ -242,7 +243,7 @@ plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xr
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
- oplot, [year(covid), year(covid)]+0.5+i, [0., limit], thick=25, color=200
+ oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ;; and a quadratic fit to all
 ;;quadratic_publications = poly_fit(year(*), publications(*), 2, yfit=quadratic_publications_fit)
@@ -256,7 +257,7 @@ oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
-oplot, [year(covid), year(covid)], [0., limit], color=0
+oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -278,7 +279,7 @@ xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1.,
 xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, continuing+first_year + 1., limit - 5, 'Continuing, Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, covid+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -302,7 +303,7 @@ plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the en
 ; shading
 loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
- oplot, [year(covid), year(covid)]+0.5+i, [0., limit], thick=25, color=200
+ oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ;; and a quadratic fit to all
 ;;quadratic_outreach = poly_fit(year(*), outreach(*), 2, yfit=quadratic_outreach_fit)
@@ -316,7 +317,7 @@ oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
-oplot, [year(covid), year(covid)], [0., limit], color=0
+oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -338,7 +339,7 @@ xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1.,
 xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, continuing+first_year + 1., limit - 5, 'Continuing, Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, covid+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year) - 10, 'Invited', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 10, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
