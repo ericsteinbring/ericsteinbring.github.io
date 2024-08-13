@@ -257,7 +257,7 @@ oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
-oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
+;oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -278,7 +278,7 @@ xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, continuing+first_year + 1., limit - 5, 'Continuing, Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, continuing+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -317,7 +317,7 @@ oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
 oplot, [year(continuing), year(continuing)], [0., limit], color=0
-oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
+;oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -338,7 +338,7 @@ xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, continuing+first_year + 1., limit - 5, 'Continuing, Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, continuing+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year) - 10, 'Invited', alignment=0., orientation=0., charsize=charsize_text, color=0
