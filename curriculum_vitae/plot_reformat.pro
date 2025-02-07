@@ -1,4 +1,6 @@
-; A plot of total output of publications and outreach, as per my reformatted CV, using the new NRC guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference", unless they are technical reports, white papers, or posters. This outputs an image of the plots which fits into the online webpage CV.
+; A plot of total output of publications and outreach, as per my reformatted CV, using the new NRC guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference", unless they are technical reports, white papers, or posters. This outputs an image of the plots which fits into my online webpage CV.
+
+; To use: generate a file called "plot_reformat_*.txt set to the current calendar year; see the existing files for the formatting. Those are (in order): year, refereed, conference, and other publications; plus invited, contributed, and other outreach. Note that the code is going to assume that the values are totals up to the end of the last calendar year, and make a prediction to the end of the current year, 5 years from now, and at retirement.
 
 pro plot_reformat
 
@@ -10,6 +12,7 @@ postdoc = 2003
 baseline = 2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995
 continuing = 2013
 pandemic = 2019 ; 2020
+current = 2024 ; 2025 ; 2024
 retirement = 2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65)
 
 ; setup
@@ -27,7 +30,7 @@ charthick = 1 ; 1 ; 2
 charsize_text = charsize-0.25 ; charsize-0.5 ; charsize-1.
 
 ; read in data
-rdfloat, 'plot_reformat_2024.txt', year, refereed, conference, other_publications, invited, contributed, other_outreach, /silent
+rdfloat, 'plot_reformat_'+strtrim(string(current),2)+'.txt', year, refereed, conference, other_publications, invited, contributed, other_outreach, /silent
 ;year = year - 1 ; shift backward the year that is read in by one, that is, report all publications to end of previous calendar year
 year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year
 years = n_elements(year)
@@ -47,15 +50,15 @@ retirement = retirement - first_year
 publications = refereed + conference + other_publications
 outreach = invited + contributed + other_outreach
 output = publications + outreach
-print, 'Year of first publication: ', floor(first_year)
-print, 'Retiring at age: ', retiring
+print, 'Year of first publication: ', strtrim(string(floor(first_year)), 2)
+print, 'Assuming retirement at age ', strtrim(string(retiring), 2)
 
 ; calculate output
 print, 'Output'
-print, 'Current as of ', floor(last_year-1)
+print, 'Current as of ', strtrim(string(floor(last_year-1)), 2)
 
 ; report
-print, 'Total refereed, conference, publications, invited, contributed, outreach:'
+print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, floor(total(refereed)), floor(total(conference)), floor(total(publications)), floor(total(invited)), floor(total(contributed)), floor(total(outreach))
 print, 'Total output:'
 print, floor(total(output))
@@ -83,7 +86,7 @@ slope_contributed = contributed(years - 1) - contributed(years - 2)
 slope_outreach = outreach(years - 1) - outreach(years - 2)
 slope_output = output(years - 1) - output(years - 2)
 print, 'Rates'
-print, 'Current refereed, conference, publications, invited, contributed, and outreach:'
+print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, floor(slope_refereed), floor(slope_conference), floor(slope_publications), floor(slope_invited), floor(slope_contributed), floor(slope_outreach)
 ;print, 'Currrent output per year:'
 ;print, floor(slope_output)
@@ -140,7 +143,7 @@ output_extension(4) = output_extension(3) + slope_output
 output_extension(5) = output_extension(4) + slope_output
 
 ; average output
-print, 'Five-year average at the end of ', floor(last_year-1)
+print, 'Five-year average at the end of ', strtrim(string(floor(last_year-1)), 2)
 
 ; and average, based on a linear fit
 slope_refereed = linfit(year(baseline:*), refereed(baseline:*), yfit=refereed_fit)
@@ -157,7 +160,7 @@ slope_invited = slope_invited(1)
 slope_contributed = slope_contributed(1)
 slope_outreach = slope_outreach(1)
 slope_output = slope_output(1)
-print, 'Average refereed, conference, publications, invited, contributed, and outreach:'
+print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, slope_refereed, slope_conference, slope_publications, slope_invited, slope_contributed, slope_outreach
 ;print, 'Average output per year:'
 ;print, slope_output
@@ -224,16 +227,16 @@ output_career = output(years - 1) + slope_output*career
 
 ; predict output
 print, 'Predictions'
-print, 'At the end of ', floor(last_year)
-print, 'Refereed, conference, publications, invited, contributed, and outreach:'
+print, 'At the end of ', strtrim(string(floor(last_year)), 2)
+print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, floor(refereed_prediction(1)), floor(conference_prediction(1)), floor(publications_prediction(1)), floor(invited_prediction(1)), floor(contributed_prediction(1)), floor(outreach_prediction(1))
 ;print, 'Total: ', floor(output_prediction(1))
-print, 'At the end of ', floor(last_year+4)
+print, 'At the end of ', strtrim(string(floor(last_year+4)), 2)
 print, floor(refereed_prediction(4)), floor(conference_prediction(4)), floor(publications_prediction(4)), floor(invited_prediction(4)), floor(contributed_prediction(4)), floor(outreach_prediction(4))
-;print, 'Total: ', floor(output_prediction(4))
+;print, 'Total: ', strtrim(string(floor(output_prediction(4)), 2)
 print, 'Career at retirement'
 print, floor(refereed_career), floor(conference_career), floor(publications_career), floor(invited_career), floor(contributed_career), floor(outreach_career)
-;print, 'Total: ', floor(output_career)
+;print, 'Total: ', strtrim(string(floor(output_career), 2)
 
 ; plot publications
 limit = limit_publications
