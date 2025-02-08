@@ -1,19 +1,22 @@
-; A plot of total output of publications and outreach, as per my reformatted CV, using the new NRC guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference", unless they are technical reports, white papers, or posters. This outputs an image of the plots which fits into my online webpage CV.
+; Generate plots of total output of publications and outreach, as per my reformatted CV, using the new NRC Canada guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference," unless they are technical reports, white papers, or posters. This outputs an image of the plots which fits into my online webpage CV. In case this may be useful for others, I have used labels for career steps that will be familiar to most: year of obtaining MSc and PhD, first tenure-track hire, etc.
+; Eric Steinbring, 8 February 2025
 
-; To use: generate a file called "plot_reformat_*.txt set to the current calendar year; see the existing files for the formatting. Those are (in order): year, refereed, conference, and other publications; plus invited, contributed, and other outreach. Note that the code is going to assume that the values are totals up to the end of the last calendar year, and make a prediction to the end of the current year, 5 years from now, and at retirement.
+; To use: generate a file called "plot_reformat_*.txt set to the current calendar year; see the existing files for the formatting. Those are (in order): year, refereed, conference, and other publications; plus invited, contributed, and other outreach. Note that the code is going to assume that the values are totals up to the end of the last calendar year, and make a prediction to the end of the current year, plus 5 years from now, or at retirement.
 
 pro plot_reformat
 
 ; inputs
-born = 1971
-thesis = 1995
-dissertation = 2001
-postdoc = 2003
-baseline = 2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995
-continuing = 2013
-pandemic = 2019 ; 2020
-current = 2024 ; 2025 ; 2024
-retirement = 2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65)
+current =      2024 ; 2025 ; 2024 ; year matches the last year of statistics and label in the file "plot_reformat_*.txt"
+born =         1971 ; year of birth
+thesis =       1995 ; year of Master's Thesis
+dissertation = 2001 ; year of Doctoral Dissertation
+postdoc =      1999 ; 2000 ; year of first post-doctoral hire: at NRC Canada this is roughly "Junior Research Officer"
+researcher =   2003 ; year of first full-time tenure-track research-job hire: at NRC Canada this is a "Research Officer"
+tenure =       2013 ; year of gaining tenure, or equivalent: at NRC Canada, this is referred to as "Continuing Staff"
+pandemic =     2019 ; 2020 ; year of the Global Pandemic (COVID-19)
+complete =     2028 ; 2023 ; year of obtaining complete, full title: at NRC Canada, this is "Principal Research Officer"
+retirement =   2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65) ; year of retirement
+baseline =     2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995 ; year from which to calculate start of averaging
 
 ; setup
 window, 1, xsize = 850, ysize = 1100, title='Cumulative publications and outreach for Eric Steinbring'
@@ -43,10 +46,12 @@ career = retirement - last_year + 1 ; calculated to the end of that year
 thesis = thesis - first_year
 dissertation = dissertation - first_year
 postdoc = postdoc - first_year
-baseline = baseline - first_year
-continuing = continuing - first_year
+researcher = researcher - first_year
+tenure = tenure - first_year
 pandemic = pandemic - first_year
+complete = complete - first_year
 retirement = retirement - first_year
+baseline = baseline - first_year
 publications = refereed + conference + other_publications
 outreach = invited + contributed + other_outreach
 output = publications + outreach
@@ -54,14 +59,12 @@ print, 'Year of first publication: ', strtrim(string(floor(first_year)), 2)
 print, 'Assuming retirement at age ', strtrim(string(retiring), 2)
 
 ; calculate output
-print, 'Output'
 print, 'Current as of ', strtrim(string(floor(last_year-1)), 2)
 
 ; report
 print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, floor(total(refereed)), floor(total(conference)), floor(total(publications)), floor(total(invited)), floor(total(contributed)), floor(total(outreach))
-print, 'Total output:'
-print, floor(total(output))
+print, 'Total output:', floor(total(output))
 
 ; calculate cumulative results
 refereed = total(refereed, /cumulative)
@@ -85,7 +88,7 @@ slope_invited = invited(years - 1) - invited(years - 2)
 slope_contributed = contributed(years - 1) - contributed(years - 2)
 slope_outreach = outreach(years - 1) - outreach(years - 2)
 slope_output = output(years - 1) - output(years - 2)
-print, 'Rates'
+print, 'Rates in the last year'
 print, 'Refereed, conference, total publications; invited, contributed talks, outreach:'
 print, floor(slope_refereed), floor(slope_conference), floor(slope_publications), floor(slope_invited), floor(slope_contributed), floor(slope_outreach)
 ;print, 'Currrent output per year:'
@@ -143,7 +146,7 @@ output_extension(4) = output_extension(3) + slope_output
 output_extension(5) = output_extension(4) + slope_output
 
 ; average output
-print, 'Five-year average at the end of ', strtrim(string(floor(last_year-1)), 2)
+print, 'Five-year average to the end of ', strtrim(string(floor(last_year-1)), 2)
 
 ; and average, based on a linear fit
 slope_refereed = linfit(year(baseline:*), refereed(baseline:*), yfit=refereed_fit)
@@ -259,8 +262,10 @@ oplot, [year(baseline), year(baseline)], [0., limit], linestyle=1, color=0
 oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
-oplot, [year(continuing), year(continuing)], [0., limit], color=0
+oplot, [year(researcher), year(researcher)], [0., limit], color=0
+oplot, [year(tenure), year(tenure)], [0., limit], color=0
 ;oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
+;oplot, [year(complete), year(complete)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -279,11 +284,16 @@ oplot, future, refereed_prediction+conference_prediction, linestyle=3, color=col
 ; labels
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, continuing+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, postdoc+first_year -0.25, limit - 5, 'Started as JRO at NRC Canada', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, researcher+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, researcher+first_year + 1., limit - 5, 'Researcher', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, researcher+first_year + 1., limit - 5, 'Hired as RO', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, tenure+first_year + 1., limit - 5, 'Tenure', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 15, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -319,8 +329,10 @@ oplot, [year(baseline), year(baseline)], [0., limit], linestyle=1, color=0
 oplot, [year(thesis), year(thesis)], [0., limit], color=0
 oplot, [year(dissertation), year(dissertation)], [0., limit], color=0
 oplot, [year(postdoc), year(postdoc)], [0., limit], color=0
-oplot, [year(continuing), year(continuing)], [0., limit], color=0
+oplot, [year(researcher), year(researcher)], [0., limit], color=0
+oplot, [year(tenure), year(tenure)], [0., limit], color=0
 ;oplot, [year(pandemic), year(pandemic)], [0., limit], color=0
+;oplot, [year(complete), year(complete)], [0., limit], color=0
 ;oplot, [year(retirement), year(retirement)], [0., limit], color=0
 ;oplot, [0, max(year)+5], [100, 100], linestyle=1, color=0
 ; plots
@@ -339,11 +351,16 @@ oplot, future, invited_prediction+contributed_prediction, linestyle=3, color=col
 ; labels
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, postdoc+first_year + 1., limit - 5, 'Hired as RO at NRC', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, continuing+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, postdoc+first_year -0.25, limit - 5, 'Started as JRO at NRC Canada', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, researcher+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, researcher+first_year + 1., limit - 5, 'Researcher', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, researcher+first_year + 1., limit - 5, 'Hired as RO', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, tenure+first_year + 1., limit - 5, 'Tenure', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
+;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year) - 10, 'Invited', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 10, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year) - 15, 'contributed', alignment=0., orientation=0., charsize=charsize_text, color=0
