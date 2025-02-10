@@ -25,11 +25,11 @@ wshow, 1
 charsize = 2. ; 3. ; 2.5 ; 2.25
 !p.background = 255
 loadct, 39, /silent
-color_refereed = 250
-color_conference = 50
-color_service = 150
-color_invited = 250
-color_contributed = 50
+color_refereed = 250 ; red
+color_conference = 50 ; blue
+color_service = 150 ; green
+color_invited = 250 ; red
+color_contributed = 100 ; 50 ; 25 ; cyan, blue or purple
 charthick = 1 ; 1 ; 2
 charsize_text = charsize-0.25 ; charsize-0.5 ; charsize-1.
 
@@ -95,8 +95,7 @@ slope_output = output(years - 1) - output(years - 2)
 print, 'Rates'
 ;print, 'Refereed, conference, total publications; service, invited, contrib. talks, and outreach:'
 print, floor(slope_refereed), floor(slope_conference), floor(slope_publications), floor(slope_service), floor(slope_invited), floor(slope_contributed), floor(slope_outreach)
-;print, 'Currrent output per year:'
-;print, floor(slope_output)
+;print, 'Currrent output per year:', floor(slope_output)
 
 ; and extend this for five years
 refereed_extension = fltarr(6)
@@ -254,13 +253,13 @@ print, 'Predictions'
 print, 'At the end of ', strtrim(string(floor(last_year)), 2)
 ;print, 'Refereed, conference, total publications; service, invited, contrib. talks, and outreach:'
 print, floor(refereed_prediction(1)), floor(conference_prediction(1)), floor(publications_prediction(1)), floor(service_prediction(1)), floor(invited_prediction(1)), floor(contributed_prediction(1)), floor(outreach_prediction(1))
-;print, 'Total: ', floor(output_prediction(1))
+;print, 'Total output: ', floor(output_prediction(1))
 print, 'At the end of ', strtrim(string(floor(last_year+4)), 2)
 print, floor(refereed_prediction(4)), floor(conference_prediction(4)), floor(publications_prediction(4)), floor(service_prediction(4)), floor(invited_prediction(4)), floor(contributed_prediction(4)), floor(outreach_prediction(4))
-;print, 'Total: ', strtrim(string(floor(output_prediction(4)), 2)
+;print, 'Total output: ', strtrim(string(floor(output_prediction(4)), 2)
 print, 'Career at retirement'
 print, floor(refereed_career), floor(conference_career), floor(publications_career), floor(service_career), floor(invited_career), floor(contributed_career), floor(outreach_career)
-;print, 'Total: ', strtrim(string(floor(output_career), 2)
+;print, 'Total output: ', strtrim(string(floor(output_career)), 2)
 
 ; plot publications
 limit = limit_publications
@@ -360,20 +359,21 @@ oplot, [year(tenure), year(tenure)], [0., limit], color=0
 ; plots
 oplot, year, outreach, thick=2, color=0
 oplot, year, service+invited+contributed, thick=2, color=color_contributed
-oplot, year, service+invited, thick=2, color=color_refereed
+;oplot, year, service+invited, thick=2, color=color_invited
 oplot, year, service, thick=2, color=color_service
 oplot, future, outreach_extension, linestyle=2, color=0
-oplot, future, service_extension+invited_extension, linestyle=2, color=color_invited
+;oplot, future, service_extension+invited_extension, linestyle=2, color=color_invited
 oplot, future, service_extension+invited_extension+contributed_extension, linestyle=2, color=color_contributed
 oplot, future, service_extension, linestyle=2, color=color_service
 oplot, year(baseline:*), outreach_fit, color=0
-oplot, year(baseline:*), service_fit+invited_fit, color=color_invited
+;oplot, year(baseline:*), service_fit+invited_fit, color=color_invited
 oplot, year(baseline:*), service_fit+invited_fit+contributed_fit, color=color_contributed
 oplot, year(baseline:*), service_fit, color=color_service
 oplot, future, outreach_prediction, linestyle=3, color=0
-oplot, future, service_prediction+invited_prediction, linestyle=3, color=color_invited
+;oplot, future, service_prediction+invited_prediction, linestyle=3, color=color_invited
 oplot, future, service_prediction+invited_prediction+contributed_prediction, linestyle=3, color=color_contributed
 oplot, future, service_prediction, linestyle=3, color=color_service
+
 ; labels
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
@@ -387,15 +387,16 @@ xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1.,
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 30, 'Service to', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 40, 'committees,', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 50, 'reviews, or', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 60, 'refereeing', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, invited(last_year-first_year)+service(last_year-first_year) - 25, 'Plus invited', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 20, 'And contrib.', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 25, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 35, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 45, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 35, 'Service to', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 45, 'committees,', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 55, 'reviews, or', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 65, 'refereeing', alignment=0., orientation=0., charsize=charsize_text, color=0
+;xyouts, last_year - 1.75, invited(last_year-first_year)+service(last_year-first_year) - 30, 'Plus invited', alignment=0., orientation=0., charsize=charsize_text, color=0
+;xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 25, 'And contrib.', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 25, 'Plus talks', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 40, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 50, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_outreach), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
