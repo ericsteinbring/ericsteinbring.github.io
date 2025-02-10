@@ -322,7 +322,8 @@ xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-fi
 xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 35, 'newsletters', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports, and', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, publications(last_year-first_year) - 60, 'posters', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
