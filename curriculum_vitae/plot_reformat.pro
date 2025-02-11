@@ -314,17 +314,17 @@ xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1.,
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 15, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 25, 'conf., and', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 35, 'newsletters', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports, and', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 60, 'posters', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 20, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 30, 'conf., and', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 40, 'newsletters', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
 axis, xaxis=0, color=0, xstyle=1, xrange=[first_year-1,last_year+5], charsize=charsize
 axis, xaxis=1, color=0, xstyle=1, xrange=[first_year-1,last_year+5], xtickformat='(A1)'
@@ -387,18 +387,19 @@ xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1.,
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 35, 'Service to', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 45, 'committees,', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 55, 'reviews, or', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, service(last_year-first_year) - 65, 'refereeing', alignment=0., orientation=0., charsize=charsize_text, color=0
-;xyouts, last_year - 1.75, invited(last_year-first_year)+service(last_year-first_year) - 30, 'Plus invited', alignment=0., orientation=0., charsize=charsize_text, color=0
-;xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 25, 'And contrib.', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 25, 'Plus talks', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 40, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, outreach(last_year-first_year) - 50, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
+
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_outreach), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 40, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 50, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, outreach(last_year-first_year) - 60, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 35, 'Plus talks', alignment=0., orientation=0., charsize=charsize_text, color=0
+;xyouts, last_year - 1.75, invited(last_year-first_year)+contributed(last_year-first_year)+service(last_year-first_year) - 35, 'And contrib.', alignment=0., orientation=0., charsize=charsize_text, color=0
+;xyouts, last_year - 1.75, invited(last_year-first_year)+service(last_year-first_year) - 40, 'Plus invited', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 40, 'Service to', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 50, 'committees,', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 60, 'reviews, or', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, service(last_year-first_year) - 70, 'refereeing', alignment=0., orientation=0., charsize=charsize_text, color=0
 ; clean up
 axis, xaxis=0, color=0, xstyle=1, xrange=[first_year-1,last_year+5], charsize=charsize
 axis, xaxis=1, color=0, xstyle=1, xrange=[first_year-1,last_year+5], xtickformat='(A1)'
