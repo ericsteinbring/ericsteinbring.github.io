@@ -1,20 +1,20 @@
-; Generate plots of total output of publications, plus service, talks and other outreach, as per my reformatted CV, using the new NRC Canada guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference," unless they are technical reports, white papers, or posters. This outputs an image of the plots which fits into my online webpage CV. In case this may be useful for others, I have used labels for career steps that will be familiar to most: year of obtaining MSc and PhD, first tenure-track hire, etc.
+; Generate plots of total output of publications, plus service, talks and other outreach, as per my reformatted CV, using the new NRC Canada guidelines.  Note that those rules allow peer-reviewed conference proceedings to appear in the refereed column, and all other contributions fall under "conference," unless they are technical reports, white papers, or posters.  Thesis and dissertation are put in the refereed-publication bin here, although not so in the NRC CV: considered a separate catagory.  This outputs an image of the plots which fits into my online webpage CV. In case this may be useful for others, I have used labels for career steps that will be familiar to most: year of obtaining MSc and PhD, first tenure-track hire, etc.
 ; Eric Steinbring, 8 February 2025
 
-; To use: generate a file called "plot_publications_*.txt set to the current calendar year, adding each that was published up until the end of the calendar year, including talks and other outreach activities; see the existing files for the formatting. Those are (in order): year, refereed, conference, and other publications; plus invited, contributed talks, and other outreach. The same is done for each offer of community service, any current committee counts as one in a calendar year, as does each paper reviewed, or thesis refereed, etc. Note that the code is going to assume that the values are totals up to the end of the last calendar year, and make a prediction to the end of the current year, plus 5 years from now, or at retirement.
+; To use: generate a file called "plot_publications_*.txt set to the current calendar year, adding each that was published up until the end of the calendar year, including talks and other outreach activities; see the existing files for the formatting. Those are (in order): year, refereed, conference, and other publications; plus invited, contributed talks, and other outreach.  The same tally is done in "plot_service_*.txt" for each offer of community service (any current committee counts as one in a calendar year, as does each paper reviewed, or thesis refereed, etc.); this will be added to talks and public outreach in the output plot. Note that the code is going to assume that the values are totals up to the end of the last calendar year, and make a prediction to the end of the current year, plus 5 years from now, or at retirement.
 
 pro plot_reformat
 
 ; inputs
 current =      2024 ; 2025 ; 2024 ; year matches the last year of statistics and label in the file "plot_reformat_*.txt"
 born =         1971 ; year of birth
-thesis =       1995 ; year of Master's Thesis
+thesis =       1995 ; year of Master's Degree Thesis
 dissertation = 2001 ; year of Doctoral Dissertation
-postdoc =      1999 ; 2000 ; year of first post-doctoral hire: at NRC Canada this is roughly "Junior Research Officer"
-researcher =   2003 ; year of first full-time tenure-track research-job hire: at NRC Canada this is a "Research Officer"
-tenure =       2013 ; year of gaining tenure, or equivalent: at NRC Canada, this is referred to as "Continuing Staff"
-pandemic =     2019 ; 2020 ; year of the Global Pandemic (COVID-19)
-complete =     2028 ; 2023 ; year of obtaining complete, full title: at NRC Canada, this is "Principal Research Officer"
+postdoc =      1999 ; 2000 ; year of first post-doctoral hire: at NRC Canada this is roughly equivalent to being a "Junior Research Officer"
+researcher =   2003 ; year of first full-time tenure-track research-job hire: at NRC Canada this is a "Research Officer", typically as a "Research Assistant" or "Research Associate"
+tenure =       2013 ; year of gaining tenure, or equivalent: at NRC Canada, this is referred to as "Continuing Staff", typically at level of "Senior Research Officer"
+pandemic =     2019 ; 2020 ; year that hails the start of the Global COVID-19 Pandemic; setting it to 2019 better matches the delayed "dip" in output that followed
+complete =     2028 ; 2023 ; year of obtaining complete, highest-level title: at NRC Canada, this is "Principal Research Officer", roughly equivalent to a Full Professor
 retirement =   2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65) ; year of retirement
 baseline =     2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995 ; year from which to calculate start of averaging
 
@@ -271,10 +271,10 @@ loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
-;; and a quadratic fit to all
-;;quadratic_publications = poly_fit(year(*), publications(*), 2, yfit=quadratic_publications_fit)
-;;oplot, year, quadratic_publications_fit, thick=3, color=150
-;quadratic_publications = poly_fit(year(baseline:*), publications(baseline:*), 2, yfit=quadratic_publications_fit)
+; and a quadratic fit to all
+quadratic_publications = poly_fit(year(*), publications(*), 2, yfit=quadratic_publications_fit) ; to beginning of records
+oplot, year, quadratic_publications_fit, thick=3, color=150
+;quadratic_publications = poly_fit(year(baseline:*), publications(baseline:*), 2, yfit=quadratic_publications_fit) ; from baseline year
 ;oplot, year(baseline:*), quadratic_publications_fit, thick=3, color=150
 loadct, 39, /silent ; back to colour
 ; limits
@@ -302,10 +302,11 @@ oplot, future, publications_prediction, linestyle=3, color=0
 oplot, future, refereed_prediction, linestyle=3, color=color_refereed
 oplot, future, refereed_prediction+conference_prediction, linestyle=3, color=color_conference
 ; labels
+loadct, 0, /silent ; greyscale
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
-xyouts, postdoc+first_year -0.25, limit - 5, 'Started as JRO at NRC Canada', alignment=1., orientation=90., charsize=charsize_text, color=0
+xyouts, postdoc+first_year - 0.25, limit - 5, 'Started as JRO at NRC Canada', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, researcher+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, researcher+first_year + 1., limit - 5, 'Researcher', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, researcher+first_year + 1., limit - 5, 'Hired as RO', alignment=1., orientation=90., charsize=charsize_text, color=0
@@ -316,12 +317,13 @@ xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientati
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, max(publications_fit) - 15, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports, and', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports and', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 60, 'posters', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 20, 'Including', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 30, 'conf., and', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 20, 'Plus conf.', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 30, 'proc. and', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year)+conference(last_year-first_year) - 40, 'newsletters', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 15, 'Peer-', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, refereed(last_year-first_year) - 25, 'reviewed', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -339,10 +341,10 @@ loadct, 0, /silent ; greyscale
 for i = 0, 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
-;; and a quadratic fit to all
-;;quadratic_outreach = poly_fit(year(*), outreach(*), 2, yfit=quadratic_outreach_fit)
-;;oplot, year, quadratic_outreach_fit, thick=3, color=150
-;quadratic_outreach = poly_fit(year(baseline:*), outreach(baseline:*), 2, yfit=quadratic_outreach_fit)
+; and a quadratic fit to all
+quadratic_outreach = poly_fit(year(*), outreach(*), 2, yfit=quadratic_outreach_fit) ; to beginning of records
+oplot, year, quadratic_outreach_fit, thick=3, color=150
+;quadratic_outreach = poly_fit(year(baseline:*), outreach(baseline:*), 2, yfit=quadratic_outreach_fit) ; from baseline year
 ;oplot, year(baseline:*), quadratic_outreach_fit, thick=3, color=150
 loadct, 39, /silent ; back to colour
 ; limits
@@ -373,8 +375,8 @@ oplot, future, outreach_prediction, linestyle=3, color=0
 ;oplot, future, service_prediction+invited_prediction, linestyle=3, color=color_invited
 oplot, future, service_prediction+invited_prediction+contributed_prediction, linestyle=3, color=color_contributed
 oplot, future, service_prediction, linestyle=3, color=color_service
-
 ; labels
+loadct, 0, /silent ; greyscale
 xyouts, thesis+first_year - 0.25, limit - 5, 'Thesis', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, dissertation+first_year - 0.25, limit - 5, 'Dissertation', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, postdoc+first_year - 0.25, limit - 5, 'Postdoc', alignment=1., orientation=90., charsize=charsize_text, color=0
@@ -387,9 +389,9 @@ xyouts, tenure+first_year + 1., limit - 5, 'Continuing SRO Staff', alignment=1.,
 xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, complete+first_year + 1., limit - 5, 'Attained PRO', alignment=1., orientation=90., charsize=charsize_text, color=0
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
-
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_outreach), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
+xyouts, last_year - 1.75, max(outreach_fit) - 15, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 40, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 50, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 60, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
