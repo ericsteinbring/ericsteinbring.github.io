@@ -6,7 +6,7 @@
 pro plot_reformat
 
 ; inputs
-current =      2024 ; 2025 ; 2024 ; year matches the last year of statistics and label in the file "plot_reformat_*.txt"
+current =      2025 ; 2025 ; 2024 ; year matches the last year of statistics and label in the file "plot_reformat_*.txt"
 born =         1971 ; year of birth
 thesis =       1995 ; year of Master's Degree Thesis
 dissertation = 2001 ; year of Doctoral Dissertation
@@ -80,8 +80,8 @@ output = total(output, /cumulative)
 
 ; set plot limits
 limit = max([publications, outreach])
-limit_publications = max(publications) + 50
-limit_outreach = max(outreach) + 30
+limit_publications = max(publications) + 75
+limit_outreach = max(outreach) + 75
 
 ; calculate rates
 slope_refereed = refereed(years - 1) - refereed(years - 2)
@@ -262,7 +262,7 @@ print, floor(refereed_career), floor(conference_career), floor(publications_care
 ;print, 'Total output: ', strtrim(string(floor(output_career)), 2)
 
 ; plot publications
-limit = limit_publications
+limit = limit_publications ; max([limit_publications, limit_outreach]) ; limit_publications
 future = [year(years-1), year(years-1) + 1, year(years-1) + 2, year(years-1) + 3, year(years-1) + 4, year(years-1) + 5]
 ;plot, year, publications, thick=2, xtitle='Year', ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], charsize=charsize, color=0
 plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1.5,1], charsize=charsize, charthick=charthick, color=0
@@ -317,7 +317,7 @@ xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientati
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_publications), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, max(publications_fit) - 15, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
+xyouts, last_year - 1.75, max(publications_fit) + 25, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
 xyouts, last_year - 1.75, publications(last_year-first_year) - 30, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 40, 'technical', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, publications(last_year-first_year) - 50, 'reports and', alignment=0., orientation=0., charsize=charsize_text, color=0
@@ -334,7 +334,7 @@ axis, yaxis=0, color=0, ystyle=1, yrange=[0., limit], charsize=charsize
 axis, yaxis=1, color=0, ystyle=1, yrange=[0., limit], ytickformat='(A1)'
 
 ; plot service and outreach
-limit = limit_outreach
+limit = limit_outreach ; max([limit_publications, limit_outreach]) ; limit_outreach
 plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Service, talks and other public outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
@@ -391,7 +391,7 @@ xyouts, pandemic+first_year + 1., limit - 5, 'Pandemic', alignment=1., orientati
 ;xyouts, retirement+first_year + 1., limit - 5, 'Retirement', alignment=1., orientation=90., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 15, 'Slope =', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, limit - 25, strmid(strtrim(string(slope_outreach), 1),0, 4)+'/year', alignment=0., orientation=0., charsize=charsize_text, color=0
-xyouts, last_year - 1.75, max(outreach_fit) - 15, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
+xyouts, last_year - 1.75, max(outreach_fit) + 25, 'Quadratic fit', alignment=0., orientation = 0., charsize=charsize_text, charthick=2, color=150
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 40, 'Total, incl.', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 50, 'interviews,', alignment=0., orientation=0., charsize=charsize_text, color=0
 xyouts, last_year - 1.75, outreach(last_year-first_year) - 60, 'other media', alignment=0., orientation=0., charsize=charsize_text, color=0
