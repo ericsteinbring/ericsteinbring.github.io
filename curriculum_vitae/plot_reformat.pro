@@ -13,7 +13,7 @@ dissertation = 2001 ; year of Doctoral Dissertation
 postdoc =      1999 ; 2000 ; year of first post-doctoral hire: at NRC Canada this is roughly equivalent to being a "Junior Research Officer"
 researcher =   2003 ; year of first full-time tenure-track research-job hire: at NRC Canada this is a "Research Officer", typically as a "Research Assistant" or "Research Associate"
 tenure =       2013 ; year of gaining tenure, or equivalent: at NRC Canada, this is referred to as "Continuing Staff", typically at level of "Senior Research Officer"
-pandemic =     2019 ; 2020 ; year that hails the start of the Global COVID-19 Pandemic; setting it to 2019 better matches the delayed "dip" in output that followed
+pandemic =     2019 ; 2019 ; 2020 ; year that hails the start of the Global COVID-19 Pandemic; setting it to either 2019 or 2020 can better matche the delayed "dip" in output that followed, as dates plotted are end-of-year
 complete =     2028 ; 2023 ; year of obtaining complete, highest-level title: at NRC Canada, this is "Principal Research Officer", roughly equivalent to a Full Professor
 retirement =   2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65) ; year of retirement
 baseline =     2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995 ; year from which to calculate start of averaging
@@ -268,7 +268,7 @@ future = [year(years-1), year(years-1) + 1, year(years-1) + 2, year(years-1) + 3
 plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1.5,1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
-for i = 0, 2 do begin ; 3 do begin
+for i = 0, 3 do begin ; 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ; and a quadratic fit to all
@@ -338,7 +338,7 @@ limit = limit_outreach ; max([limit_publications, limit_outreach]) ; limit_outre
 plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Service, talks and other public outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
-for i = 0, 2 do begin ; 3 do begin
+for i = 0, 3 do begin ; 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ; and a quadratic fit to all
