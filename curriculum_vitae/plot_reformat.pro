@@ -13,8 +13,8 @@ dissertation = 2001 ; year of Doctoral Dissertation
 postdoc =      1999 ; 2000 ; year of first post-doctoral hire: at NRC Canada this is roughly equivalent to being a "Junior Research Officer"
 researcher =   2003 ; year of first full-time tenure-track research-job hire: at NRC Canada this is a "Research Officer", typically as a "Research Assistant" or "Research Associate"
 tenure =       2013 ; year of gaining tenure, or equivalent: at NRC Canada, this is referred to as "Continuing Staff", typically at level of "Senior Research Officer"
-pandemic =     2019 ; 2019 ; 2020 ; year that hails the start of the Global COVID-19 Pandemic; setting it to either 2019 or 2020 can better matche the delayed "dip" in output that followed, as dates plotted are end-of-year
-complete =     2028 ; 2023 ; year of obtaining complete, highest-level title: at NRC Canada, this is "Principal Research Officer", roughly equivalent to a Full Professor
+pandemic =     2019 ; 2019 ; 2020 ; year of start to COVID-19 Pandemic; setting it to either 2019 or 2020 can better match the delayed "dip" in output that followed, as dates plotted are end-of-year
+complete =     2028 ; 2023 ; year of obtaining complete, highest-level title: at NRC Canada, this is "Principal Research Officer"; elsewhere "Distinguished Professor" or "Full Professor"
 retirement =   2036 ; 2026 ; 2029 ; 2036 (55, 60, or 65) ; year of retirement
 baseline =     2001 ; 2001 ; 2000 ; 1999 ; 1998 ; 1995 ; year from which to calculate start of averaging
 
@@ -37,7 +37,7 @@ charsize_text = charsize-0.25 ; charsize-0.5 ; charsize-1.
 rdfloat, 'plot_service_'+strtrim(string(current),2)+'.txt', year, service, /silent
 rdfloat, 'plot_publications_'+strtrim(string(current),2)+'.txt', year, refereed, conference, other_publications, invited, contributed, other_outreach, /silent
 ;year = year - 1 ; shift backward the year that is read in by one, that is, report all publications to end of previous calendar year
-year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year
+;year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year
 years = n_elements(year)
 first_year = year(0) ; floor(min(year(where((refereed gt 0) or (conference gt 0) or (other_publications gt 0))))) ; year(0)
 last_year = year(years - 1)
@@ -61,7 +61,8 @@ print, 'Year of first publication: ', strtrim(string(floor(first_year)), 2)
 print, 'Assuming retirement at age ', strtrim(string(retiring), 2)
 
 ; calculate output
-print, 'Current as of ', strtrim(string(floor(last_year-1)), 2)
+;print, 'Current as of ', strtrim(string(floor(last_year-1)), 2)
+print, 'Current as of ', strtrim(string(floor(last_year)), 2)
 
 ; report
 print, 'Refereed, conference, total publications; service, invited, contrib. talks, and outreach:'
@@ -250,13 +251,13 @@ output_career = output(years - 1) + slope_output*career
 
 ; predict output
 print, 'Predictions'
-print, 'At the end of ', strtrim(string(floor(last_year)), 2)
+print, 'At the end of ', strtrim(string(floor(last_year+1)), 2)
 ;print, 'Refereed, conference, total publications; service, invited, contrib. talks, and outreach:'
 print, floor(refereed_prediction(1)), floor(conference_prediction(1)), floor(publications_prediction(1)), floor(service_prediction(1)), floor(invited_prediction(1)), floor(contributed_prediction(1)), floor(outreach_prediction(1))
 ;print, 'Total output: ', floor(output_prediction(1))
-print, 'At the end of ', strtrim(string(floor(last_year+4)), 2)
-print, floor(refereed_prediction(4)), floor(conference_prediction(4)), floor(publications_prediction(4)), floor(service_prediction(4)), floor(invited_prediction(4)), floor(contributed_prediction(4)), floor(outreach_prediction(4))
-;print, 'Total output: ', strtrim(string(floor(output_prediction(4)), 2)
+print, 'At the end of ', strtrim(string(floor(last_year+5)), 2)
+print, floor(refereed_prediction(5)), floor(conference_prediction(5)), floor(publications_prediction(5)), floor(service_prediction(5)), floor(invited_prediction(5)), floor(contributed_prediction(5)), floor(outreach_prediction(5))
+;print, 'Total output: ', strtrim(string(floor(output_prediction(5)), 2)
 print, 'Career at retirement'
 print, floor(refereed_career), floor(conference_career), floor(publications_career), floor(service_career), floor(invited_career), floor(contributed_career), floor(outreach_career)
 ;print, 'Total output: ', strtrim(string(floor(output_career)), 2)
@@ -268,7 +269,7 @@ future = [year(years-1), year(years-1) + 1, year(years-1) + 2, year(years-1) + 3
 plot, year, publications, thick=2, ytitle='Publications', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[1.5,1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
-for i = 0, 3 do begin ; 2 do begin ; 3 do begin
+for i = 0, 2 do begin ; 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ; and a quadratic fit to all
@@ -338,7 +339,7 @@ limit = limit_outreach ; max([limit_publications, limit_outreach]) ; limit_outre
 plot, year, outreach, thick=2, xtitle='Year (Note: with output plotted at the end of each calendar year)', ytitle='Service, talks and other public outreach', xstyle=1, ystyle=1, xrange=[first_year-1,last_year+5], yrange=[0,limit], ymargin=[3.5, 1], charsize=charsize, charthick=charthick, color=0
 ; shading
 loadct, 0, /silent ; greyscale
-for i = 0, 3 do begin ; 2 do begin ; 3 do begin
+for i = 0, 2 do begin ; 2 do begin ; 3 do begin
  oplot, [year(pandemic), year(pandemic)]+0.5+i, [0., limit], thick=25, color=200
 endfor
 ; and a quadratic fit to all
