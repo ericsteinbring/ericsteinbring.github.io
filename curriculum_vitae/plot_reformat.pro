@@ -36,8 +36,8 @@ charsize_text = charsize-0.25 ; charsize-0.5 ; charsize-1.
 ; read in data
 rdfloat, 'plot_service_'+strtrim(string(current),2)+'.txt', year, service, /silent
 rdfloat, 'plot_publications_'+strtrim(string(current),2)+'.txt', year, refereed, conference, other_publications, invited, contributed, other_outreach, /silent
-;year = year - 1 ; shift backward the year that is read in by one, that is, report all publications to end of previous calendar year
-;year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year
+;year = year - 1 ; shift backward the year that is read in by one, that is, report all publications to end of previous calendar year; default is to plot at end of last year
+;year = year + 1 ; shift forward the year that is read in by one, that is, report all publications to end of current calendar year; default is to plot at end of last year
 years = n_elements(year)
 first_year = year(0) ; floor(min(year(where((refereed gt 0) or (conference gt 0) or (other_publications gt 0))))) ; year(0)
 last_year = year(years - 1)
@@ -62,7 +62,7 @@ print, 'Assuming retirement at age ', strtrim(string(retiring), 2)
 
 ; calculate output
 ;print, 'Current as of ', strtrim(string(floor(last_year-1)), 2)
-print, 'Current as of ', strtrim(string(floor(last_year)), 2)
+print, 'Current as of year-end ', strtrim(string(floor(last_year)), 2)
 
 ; report
 print, 'Refereed, conference, total publications; service, invited, contrib. talks, and outreach:'
@@ -157,7 +157,8 @@ output_extension(4) = output_extension(3) + slope_output
 output_extension(5) = output_extension(4) + slope_output
 
 ; average output
-print, 'Five-year average rates to the end of ', strtrim(string(floor(last_year-1)), 2)
+;print, 'Five-year average rates to the end of ', strtrim(string(floor(last_year-1)), 2)
+print, 'Five-year average rates at year-end of ', strtrim(string(floor(last_year)), 2)
 
 ; and average, based on a linear fit
 slope_refereed = linfit(year(baseline:*), refereed(baseline:*), yfit=refereed_fit)
